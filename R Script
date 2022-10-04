@@ -118,3 +118,21 @@ levels(Month.Temp)
 Model <- lm(formula = Cases ~ Egg.Pr + First.Week + Easter.New + Week + 
      Month.Temp, data = Eggs)
 summary(Model)
+
+#5th Model (Adjusted R-squared = 0.8183)
+Eggs$Seasons <- recode_factor(Eggs$Month,
+                              `March` = "Spring",
+                              `April` = "Spring",
+                              `May` = "Spring",
+                              `June` = "Summer",
+                              `July` = "Summer",
+                              `August` = "Summer", 
+                              `September` = "Autumn",
+                              `October` = "Autumn", 
+                              `November` = "Autumn",
+                              `December` = "Winter",
+                              `January` = "Winter",
+                              `February` = "Winter")
+#Regression Output
+LinearEggs_seasons <- lm(formula = Cases ~ Cereal.Pr + Chicken.Pr + Pork.Pr + Easter + First.Week + Egg.Pr + Seasons + Beef.Pr, data=Eggs)
+summary(LinearEggs_seasons)
