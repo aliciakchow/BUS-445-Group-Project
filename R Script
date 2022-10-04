@@ -90,3 +90,21 @@ summary(LinearEggs2)
 #3rd Model (Adjusted R-squared = 0.8438 )
 LinearEggs2 <- lm(formula = Cases ~ Cereal.Pr + Easter + First.Week + Egg.Pr + Month + Beef.Pr, data=Eggs)
 summary(LinearEggs)
+
+#4th Model (Adjusted R-squared = 0.8207)
+Eggs$Seasons <- recode_factor(Eggs$Month,
+                              `March` = "Spring",
+                              `April` = "Spring",
+                              `May` = "Spring",
+                              `June` = "Summer",
+                              `July` = "Summer",
+                              `August` = "Summer", 
+                              `September` = "Autumn",
+                              `October` = "Autumn", 
+                              `November` = "Autumn",
+                              `December` = "Winter",
+                              `January` = "Winter",
+                              `February` = "Winter")
+
+LinearEggs_seasons <- lm(formula = Cases ~ Cereal.Pr + Easter + First.Week + Egg.Pr + Seasons + Beef.Pr, data=Eggs)
+summary(LinearEggs_seasons)
