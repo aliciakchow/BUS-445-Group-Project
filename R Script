@@ -1,0 +1,48 @@
+#Clear console
+rm(list = ls())
+
+#Install package
+install.packages("dplyr")
+install.packages("forcats")
+install.packages("effects")
+install.packages("car")
+
+library("dplyr")
+library("forcats")
+library("effects")
+library("car")
+
+library(readr)
+Eggs <- read.csv("egg_data.csv",stringsAsFactors = TRUE)
+
+glimpse(Eggs) # View snapshot of data
+#variable.summary(Eggs) # View variable summary
+
+#Plot a scatterplot with Best-fit line, Boxplots, and Smooth Line
+scatterplot(Cases ~ Egg.Pr, # R Formula Notation: Y ~ X
+regLine = TRUE, # plot the fitted regression line smooth = TRUE, # Show smooth line
+boxplots = "xy", # Show marginal boxplots for both axis
+data = Eggs) # Specify dataset
+
+#Plot a line graph
+plot(Cases ~ Week,
+type = 'o', # Plot points and lines
+data = Eggs)
+
+# Plot a Boxplot
+Boxplot(Cases ~ Easter, data = Eggs)
+
+#4.5.7
+Boxplot(Cases ~ First.Week, data = Eggs)
+#First.Week == 'Yes'
+103042.5 - 98252 = 4790.5
+
+#4.5.8
+scatterplotMatrix( ~ Beef.Pr + Cases + Cereal.Pr + Chicken.Pr + Egg.Pr + Pork.Pr + Week, diagonal = list(method = "boxplot"), col = "light blue", data = Eggs)
+quantile((Eggs[Eggs$First.Week == "No", ])$Cases)
+quantile((Eggs[Eggs$First.Week == "Yes", ])$Cases)
+
+#4.5.10
+#Create linear regression model
+LinearEggs <- lm(formula = Cases ~ Cereal.Pr + Chicken.Pr + Easter + First.Week + Egg.Pr + Month + Pork.Pr + Beef.Pr, data = Eggs)
+summary(LinearEggs)
