@@ -1,5 +1,3 @@
-#Set working directory
-
 #Clear console
 rm(list = ls())
 
@@ -18,7 +16,7 @@ library(readr)
 Eggs <- read.csv("egg_data.csv",stringsAsFactors = TRUE)
 
 glimpse(Eggs) # View snapshot of data
-#variable.summary(Eggs) # View variable summary
+variable.summary(Eggs) #View variable summary
 
 #Plot a scatterplot with Best-fit line, Boxplots, and Smooth Line
 scatterplot(Cases ~ Egg.Pr, # R Formula Notation: Y ~ X
