@@ -109,7 +109,7 @@ Eggs$Seasons <- recode_factor(Eggs$Month,
 LinearEggs_seasons <- lm(formula = Cases ~ Cereal.Pr + Easter + First.Week + Egg.Pr + Seasons + Beef.Pr, data=Eggs)
 summary(LinearEggs_seasons)
 
-#Alicia's model (R-squared of 0.8091)
+#Alicia's model (adjusted R-squared of 0.8091)
 Month.Temp <- Eggs$Month.New
 levels(Month.Temp) <- list("Cold" = c("January", "February", "March", "September", "November", "December"),
                             "Hot" = c("May", "June", "July", "August"))
