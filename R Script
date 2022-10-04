@@ -86,3 +86,7 @@ LinearEggs2 <- lm(formula = Log.Cases ~ Log.Cereal.Pr + Log.Chicken.Pr + Easter.
                     First.Week + Log.Egg.Pr + Month.New + Log.Pork.Pr + Log.Beef.Pr,
                     data = Eggs)
 summary(LinearEggs2)
+
+#3rd Model (Adjusted R-squared = 0.8438 )
+LinearEggs2 <- lm(formula = Cases ~ Cereal.Pr + Easter + First.Week + Egg.Pr + Month + Beef.Pr, data=Eggs)
+summary(LinearEggs)
