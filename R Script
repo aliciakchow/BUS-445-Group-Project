@@ -1,5 +1,4 @@
 #Set working directory
-setwd("~/Documents/5th Year/BUS 445/RStudio")
 
 #Clear console
 rm(list = ls())
