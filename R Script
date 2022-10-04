@@ -1,3 +1,6 @@
+#Set working directory
+setwd("~/Documents/5th Year/BUS 445/RStudio")
+
 #Clear console
 rm(list = ls())
 
@@ -29,7 +32,7 @@ plot(Cases ~ Week,
 type = 'o', # Plot points and lines
 data = Eggs)
 
-# Plot a Boxplot
+#Plot a Boxplot
 Boxplot(Cases ~ Easter, data = Eggs)
 
 #4.5.7
@@ -46,3 +49,43 @@ quantile((Eggs[Eggs$First.Week == "Yes", ])$Cases)
 #Create linear regression model
 LinearEggs <- lm(formula = Cases ~ Cereal.Pr + Chicken.Pr + Easter + First.Week + Egg.Pr + Month + Pork.Pr + Beef.Pr, data = Eggs)
 summary(LinearEggs)
+
+#4.5.11
+levels(Eggs$Month)
+
+#Relevel
+Eggs$Month.New <- fct_relevel(Eggs$Month,
+                              "January", "February", "March", "April",
+                              "May", "June", "July", "August", "September",
+                              "October", "November", "December")
+levels(Eggs$Month.New)
+
+#Relevel Easter
+Eggs$Easter.New <- fct_relevel(Eggs$Easter,
+                               "Non Easter", "Pre Easter", "Easter", "Post Easter" )
+levels(Eggs$Easter.New)
+
+#Effect size plots for Egg Prices from the LinearEggs model
+plot(predictorEffects(LinearEggs,"Egg.Pr"))
+
+plot(predictorEffects(LinearEggs,c("Egg.Pr", "Easter.New", "Beef.Pr")))
+plot(allEffects(LinearEggs))
+
+#Run a ANOVA to test if 'month' variable as a whole is significant
+Anova(LinearEggs)
+
+#Natural-Log transform "Cases" and all price variables into new variables
+Eggs$Log.Cases <- log(Eggs$Cases)
+Eggs$Log.Egg.Pr <- log(Eggs$Egg.Pr)
+Eggs$Log.Beef.Pr <- log(Eggs$Beef.Pr)
+Eggs$Log.Pork.Pr <- log(Eggs$Pork.Pr)
+Eggs$Log.Chicken.Pr <- log(Eggs$Chicken.Pr)
+Eggs$Log.Cereal.Pr <- log(Eggs$Cereal.Pr)
+
+#Verify transformation
+glimpse(Eggs)
+
+LinearEggs2 <- lm(formula = Log.Cases ~ Log.Cereal.Pr + Log.Chicken.Pr + Easter.New +
+                    First.Week + Log.Egg.Pr + Month.New + Log.Pork.Pr + Log.Beef.Pr,
+                    data = Eggs)
+summary(LinearEggs2)
